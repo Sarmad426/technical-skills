@@ -269,6 +269,133 @@ Heap is complete ✅
 * **Insertion → bubble up** until parent > child.
 * **Deletion → bubble down** until parent > children.
 
+
+# 🔹 Heap Sort Algorithm (using Max-Heap)
+
+### Steps:
+
+1. **Build a Max-Heap** from the array.
+2. Repeatedly remove the root (largest element).
+3. Place the removed element at the **end of the array**.
+4. Heapify the remaining elements.
+5. Continue until heap is empty → array is sorted in ascending order.
+
 ---
 
-👉 Do you want me to also explain **Heap Sort** using this same Max-Heap (it’s basically repeated deletions)?
+# Example: Sort `[10, 20, 5, 6, 1, 8]`
+
+### Step 1: Build Max-Heap
+
+Heap form:
+
+```
+      20
+     /   \
+   10     8
+  /  \   /
+ 6    1 5
+```
+
+Array representation: `[20, 10, 8, 6, 1, 5]`
+
+---
+
+### Step 2: Remove Root (`20`)
+
+* Swap `20` with last element (`5`).
+* Array: `[5, 10, 8, 6, 1, | 20]`
+* Heapify `[5, 10, 8, 6, 1]` →
+
+```
+      10
+     /   \
+    6     8
+   / \
+  5   1
+```
+
+Array: `[10, 6, 8, 5, 1, | 20]`
+
+---
+
+### Step 3: Remove Root (`10`)
+
+* Swap `10` with last element (`1`).
+* Array: `[1, 6, 8, 5, | 10, 20]`
+* Heapify `[1, 6, 8, 5]` →
+
+```
+      8
+     / \
+    6   1
+   /
+  5
+```
+
+Array: `[8, 6, 1, 5, | 10, 20]`
+
+---
+
+### Step 4: Remove Root (`8`)
+
+* Swap `8` with last element (`5`).
+* Array: `[5, 6, 1, | 8, 10, 20]`
+* Heapify `[5, 6, 1]` →
+
+```
+     6
+    / \
+   5   1
+```
+
+Array: `[6, 5, 1, | 8, 10, 20]`
+
+---
+
+### Step 5: Remove Root (`6`)
+
+* Swap `6` with last element (`1`).
+* Array: `[1, 5, | 6, 8, 10, 20]`
+* Heapify `[1, 5]` →
+
+```
+   5
+  /
+ 1
+```
+
+Array: `[5, 1, | 6, 8, 10, 20]`
+
+---
+
+### Step 6: Remove Root (`5`)
+
+* Swap `5` with last element (`1`).
+* Array: `[1, | 5, 6, 8, 10, 20]`
+* Heapify `[1]` → no change.
+
+---
+
+### ✅ Final Sorted Array
+
+```
+[1, 5, 6, 8, 10, 20]
+```
+
+---
+
+# ⚡ Complexity
+
+* **Heapify** = O(log n)
+* **Building Heap** = O(n)
+* **Total Heap Sort** = O(n log n)
+
+---
+
+# 🎯 Key Takeaways
+
+* Heap Sort uses the **Heap property** to repeatedly extract the max (or min).
+* Sorting is **in-place** (no extra arrays).
+* Time = **O(n log n)** always (better worst-case than quicksort).
+
+
