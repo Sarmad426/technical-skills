@@ -87,8 +87,18 @@ D B E A C
 
 ---
 
-✨ Quick check for you:
-If in a **Binary Search Tree (BST)**, the root is `50`, and we insert `30` and `70`, where will `30` and `70` go (left or right of 50)?
+**Trees use case in AI/ML (Decision Trees)**
 
 * `30` will go to the left of `50` (since `30 < 50`).
 * `70` will go to the right of `50` (since `70 > 50`).
+```
+        Is Age > 30?
+          /      \
+        Yes       No
+       /            \
+   Has job?        Student?
+```
+
+✨ Quick check for you:
+If in a **Binary Search Tree (BST)**, the root is `50`, and we insert `30` and `70`, where will `30` and `70` go (left or right of 50)?
+
