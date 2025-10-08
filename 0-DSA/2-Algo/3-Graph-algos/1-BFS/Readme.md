@@ -1,140 +1,159 @@
-# 🧭 Depth-First Search (DFS)
+# **Breadth-First Search (BFS)**
 
-## 📘 Overview
-
-**Depth-First Search (DFS)** is a **graph traversal algorithm** that explores as far as possible along a branch before backtracking.
-It dives **deep** into one path, visiting nodes recursively (or using a stack), then backtracks when no unvisited neighbors remain.
-
-Think of DFS like exploring a **maze** — you follow one corridor all the way to the end, and only when you hit a dead end do you turn back.
+### *Graph Traversal Algorithm*
 
 ---
 
-## ⚙️ How It Works
+## 🧠 **Overview**
 
-1. Start from a **source node**.
-2. Mark it as **visited**.
-3. Visit the **first unvisited neighbor** and go deeper recursively.
-4. If no unvisited neighbors remain, **backtrack** to explore other paths.
-5. Continue until all nodes are visited.
+**Breadth-First Search (BFS)** is a fundamental graph traversal algorithm used to explore nodes level by level.
+Starting from a **source node**, BFS visits all its **neighbors first**, then moves outward to the next level of nodes.
 
-> DFS can be implemented **recursively** or **iteratively** using a **stack**.
+It’s often compared to a “wave expansion” — visiting everything one step away before moving further.
 
 ---
 
-## 🧠 Intuition / Analogy
+## ⚙️ **Core Idea**
 
-Imagine a **file system**:
-
-* You open a folder.
-* Then open subfolders inside it.
-* You keep going deeper until there’s no more subfolder.
-* Then you go back and explore the next folder.
-
-That’s exactly how DFS works — **go deep, then backtrack**.
+BFS uses a **Queue (FIFO)** data structure to keep track of nodes to visit.
+It also maintains a **Visited Set** to prevent reprocessing the same node.
 
 ---
 
-## 💡 Key Points
+## 🧩 **Algorithm Steps**
 
-* Uses **Stack (LIFO)** or **recursion**.
-* Traverses **depth-first**.
-* Doesn’t guarantee shortest path (unlike BFS).
-* Time Complexity: **O(V + E)**
-* Space Complexity: **O(V)** (due to recursion stack or explicit stack)
+1. Start from a given source node.
+2. Enqueue it and mark it as visited.
+3. While the queue is not empty:
+
+   * Dequeue a node.
+   * Visit it (process or print).
+   * Enqueue all *unvisited* adjacent nodes.
+4. Continue until all reachable nodes are processed.
 
 ---
 
-## 🧩 Pseudocode (Recursive)
+## 💻 **Python Implementation**
 
 ```python
-def dfs(graph, node, visited=None):
-    if visited is None:
-        visited = set()
+from collections import deque
 
-    if node not in visited:
-        print(node)
-        visited.add(node)
-        for neighbor in graph[node]:
-            dfs(graph, neighbor, visited)
-```
-
----
-
-## 🧩 Pseudocode (Iterative)
-
-```python
-def dfs_iterative(graph, start):
+def bfs(graph, start):
     visited = set()
-    stack = [start]
+    queue = deque([start])
+    visited.add(start)
 
-    while stack:
-        node = stack.pop()
-        if node not in visited:
-            print(node)
-            visited.add(node)
-            for neighbor in reversed(graph[node]):  # reversed to maintain order
-                if neighbor not in visited:
-                    stack.append(neighbor)
-```
+    while queue:
+        node = queue.popleft()
+        print(node, end=" ")
 
----
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
 
-## 🗺️ Example
-
-```python
+# Example graph (Adjacency List)
 graph = {
-  'A': ['B', 'C'],
-  'B': ['D', 'E'],
-  'C': ['F'],
-  'D': [],
-  'E': ['F'],
-  'F': []
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A'],
+    'D': ['B'],
+    'E': ['B']
 }
 
-dfs(graph, 'A')
+bfs(graph, 'A')
 ```
 
 **Output:**
 
 ```
-A B D E F C
+A B C D E
 ```
 
-👉 DFS goes **deep** first — explores one branch fully before moving to another.
+---
+
+## ⏱️ **Complexity Analysis**
+
+| Type      | Complexity | Description                       |
+| --------- | ---------- | --------------------------------- |
+| **Time**  | O(V + E)   | Visits every vertex and edge once |
+| **Space** | O(V)       | Queue + visited set               |
+
+> **V:** number of vertices
+> **E:** number of edges
 
 ---
 
-## 🧰 Real-World Applications
+## 🌍 **Real-World Applications**
 
-| Use Case                           | Explanation                                          |
-| ---------------------------------- | ---------------------------------------------------- |
-| **Pathfinding / Maze Solving**     | Explores deep routes before backtracking.            |
-| **Topological Sorting**            | Used in scheduling or dependency resolution.         |
-| **Cycle Detection**                | Detects cycles in directed or undirected graphs.     |
-| **Connected Components**           | Finds isolated parts of a graph.                     |
-| **Solving Puzzles (e.g., Sudoku)** | Explores every possibility recursively.              |
-| **Web Crawling (Deep mode)**       | Crawls deep into linked pages before moving to next. |
+### 1. **Shortest Path (Unweighted Graphs)**
+
+Used to find the shortest path between two nodes (e.g., in road or network graphs).
+
+* **Example:** Finding the minimal number of connections in a social network.
+* **Algorithm:** Each BFS level = 1 more edge from the source.
 
 ---
 
-## 🆚 DFS vs BFS
+### 2. **Social Networks (Facebook, LinkedIn)**
 
-| Feature                    | DFS                      | BFS                      |
-| -------------------------- | ------------------------ | ------------------------ |
-| Data Structure             | Stack / Recursion        | Queue                    |
-| Traversal                  | Depth-wise               | Level-wise               |
-| Shortest Path (Unweighted) | ❌ Not guaranteed         | ✅ Yes                    |
-| Memory Usage               | Lower (usually)          | Higher                   |
-| Backtracking               | Yes                      | No                       |
-| Typical Use                | Search all possibilities | Find shortest connection |
+BFS helps find *mutual friends* and *connection levels*:
+
+* 1st Level → Direct Friends
+* 2nd Level → Friends of Friends
+* 3rd Level → Extended Network
 
 ---
 
-## 🧩 Example Analogy
+### 3. **Web Crawlers**
 
-Exploring folders in a computer:
+Used to traverse the web starting from one page (node) and discovering all reachable URLs (neighbors) level by level.
 
-* You open one folder.
-* Keep diving into subfolders.
-* Once done, you come back and open the next folder.
-  That’s **Depth-First Search** in real life.
+---
+
+### 4. **Navigation Systems (Google Maps, Uber)**
+
+In *unweighted* graphs, BFS finds the shortest route (fewest hops) between two points.
+If edges have weights (distances), **Dijkstra’s Algorithm** is used instead.
+
+---
+
+### 5. **Broadcasting & Networking**
+
+BFS is used for **message broadcasting**, **flood fill algorithms**, and **peer-to-peer discovery**, ensuring even distribution across network nodes.
+
+---
+
+## 🧭 **When to Use BFS**
+
+| Scenario                                       | Why BFS?                                    |
+| ---------------------------------------------- | ------------------------------------------- |
+| Need shortest path in an unweighted graph      | Explores level by level                     |
+| Need to discover connected components          | Systematically covers all reachable nodes   |
+| Working with social, web, or computer networks | Natural representation for graph structures |
+
+---
+
+## 📘 **Summary**
+
+| Property                | Description                              |
+| ----------------------- | ---------------------------------------- |
+| **Traversal Order**     | Level-by-level                           |
+| **Data Structure Used** | Queue (FIFO)                             |
+| **Ideal For**           | Shortest paths, network analysis         |
+| **Complexity**          | O(V + E)                                 |
+| **Applications**        | Maps, Social Media, Crawlers, Networking |
+
+---
+
+### 🧩 Example Visualization
+
+```
+Graph:
+A — B — D
+|   |
+C   E
+
+BFS Traversal (start from A):
+A → B → C → D → E
+```
