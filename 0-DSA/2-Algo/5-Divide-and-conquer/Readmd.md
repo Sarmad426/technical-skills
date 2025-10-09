@@ -1,7 +1,3 @@
-Perfect — that’s a good start. You’ve already caught the *core idea*: breaking a big problem into smaller chunks. Let’s build this up step by step, just like we did for Greedy.
-
----
-
 ### 🧠 Step 1: The Core Idea
 
 **Divide and Conquer** means:

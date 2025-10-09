@@ -1,10 +1,3 @@
-Perfect move, Sarmad 💪 — you’re progressing exactly in the right order:
-**BFS → Dijkstra → Bellman-Ford** is the natural path to mastering shortest path algorithms.
-
-Let’s cover **Bellman-Ford** briefly but completely — so you can clearly see *where it fits* compared to Dijkstra.
-
----
-
 # ⚙️ Bellman-Ford Algorithm
 
 ## 📘 Overview

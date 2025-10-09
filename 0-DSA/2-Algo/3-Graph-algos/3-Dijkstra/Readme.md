@@ -1,9 +1,3 @@
-Perfect 👏 — now we’re stepping into **weighted graph algorithms**, and **Dijkstra’s Algorithm** is the cornerstone of them all.
-
-Let’s break it down in the same structured, documentation-style format so it fits your learning system (and your README structure).
-
----
-
 # 🚀 Dijkstra’s Algorithm
 
 ## 📘 Overview

@@ -1,8 +1,3 @@
-Perfect — we’re continuing your DSA learning streak nicely.
-Let’s build up from intuition again, the way we did for trees and graphs.
-
----
-
 ### 🧠 Step 1: Intuition Behind Greedy Algorithms
 
 Imagine you’re traveling and need to **collect as many coins as possible** while moving from town to town.
